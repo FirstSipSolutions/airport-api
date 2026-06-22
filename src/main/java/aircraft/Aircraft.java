@@ -11,8 +11,8 @@ public class Aircraft {
     private String airlineName;
     private int numberOfPassengers;
 
-//    @ManyToMany
-//    public List<Airport> airport;
+    @ManyToMany
+    private List<Airport> airports;
 
     public Aircraft(){
     }
@@ -47,5 +47,13 @@ public class Aircraft {
 
     public void setNumberOfPassengers(int numberOfPassengers) {
         this.numberOfPassengers = numberOfPassengers;
+    }
+
+    public List<Airport> getAirports() {
+        return airports;
+    }
+
+    public void setAirports(List<Airport> airports) {
+        this.airports = airports;
     }
 }
