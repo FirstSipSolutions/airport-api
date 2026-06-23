@@ -1,11 +1,25 @@
 package com.project.aircraft;
 
+<<<<<<< Updated upstream:src/main/java/com/project/aircraft/Aircraft.java
 import com.project.airport.Airport;
+=======
+
+
+/*
+ * FirstSipSolutions
+ * Author: Chris/Justin
+ * SD 15 - 2026
+ */
+
+
+
+>>>>>>> Stashed changes:src/main/java/aircraft/Aircraft.java
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Id;
+import airport.Airport;
 import java.util.List;
 
 @Entity
