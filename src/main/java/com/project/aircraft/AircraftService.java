@@ -1,4 +1,4 @@
-package aircraft;
+package com.project.aircraft;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,11 @@ public class AircraftService {
     }
 
     public Aircraft getAircraftById(Long id) {
-        Optional<Aircraft> existingId = aircraftRepository.findById(id);
+        Optional<Aircraft> existingAircraft = aircraftRepository.findById(id);
 
-        if (existingId.isPresent()) {
-            return aircraftRepository.findById(id);
+        if (existingAircraft.isPresent()) {
+
+            return existingAircraft.get();
         }
         return null;
     }

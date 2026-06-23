@@ -1,6 +1,6 @@
-package aircraft;
+package com.project.aircraft;
 
-import airport.Airport;
+import com.project.airport.Airport;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
