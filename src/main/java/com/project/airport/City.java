@@ -1,4 +1,4 @@
-package com.project.airport;
+
 
 
 /*
@@ -6,7 +6,7 @@ package com.project.airport;
  * Author: Chris/Justin
  * SD 15 - 2026
  */
-
+package com.project.airport;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +25,9 @@ public class City {
     private String name;
     private String state;
     private int population;
+
+
+
 
     public City() {
     }

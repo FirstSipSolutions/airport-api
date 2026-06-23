@@ -1,4 +1,3 @@
-package com.project.airport;
 
 
 
@@ -9,7 +8,7 @@ package com.project.airport;
  * SD 15 - 2026
  */
 
-
+package com.project.airport;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

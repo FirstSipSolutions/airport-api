@@ -1,4 +1,4 @@
-package airport;
+
 
 
 /*
@@ -6,7 +6,7 @@ package airport;
  * Author: Chris/Justin
  * SD 15 - 2026
  */
-
+package com.project.airport;
 
 import org.springframework.data.repository.CrudRepository;
 
