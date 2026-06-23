@@ -1,62 +1,68 @@
-package airport;
-
-
-// first sip solutions
-// will add comments asap
-// But  here is the airport java class and entity
-
+package com.project.airport;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Airport {
+
+
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-    private String code;
+    private String state;
+    private int population;
 
-    @ManyToOne
-    private City city;
-
-    public Airport() {
+    public City() {
     }
 
     public Long getId() {
+
+
         return id;
     }
 
     public void setId(Long id) {
+
+
         this.id = id;
     }
 
     public String getName() {
+
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 
-    public String getCode() {
-        return code;
+    public String getState() {
+
+        return state;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setState(String state) {
+
+        this.state = state;
     }
 
-    public City getCity() {
-        return city;
+    public int getPopulation() {
+
+
+        return population;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setPopulation(int population) {
+
+
+        this.population = population;
     }
 }

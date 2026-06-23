@@ -1,2 +1,2 @@
-# airport-api
-Spring Boot REST API for an airport system
+# com.project.airport-api
+Spring Boot REST API for an com.project.airport system
