@@ -1,10 +1,18 @@
 package com.project.airport;
 
 
+<<<<<<< Updated upstream:src/main/java/com/project/airport/Airport.java
 // first sip solutions
 // will add comments asap
 // But  here is the com.project.airport java class and entity
 
+=======
+/*
+ * FirstSipSolutions
+ * Author: Chris/Justin
+ * SD 15 - 2026
+ */
+>>>>>>> Stashed changes:src/main/java/airport/Airport.java
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,5 +1,13 @@
 package com.project.airport;
 
+
+/*
+ * FirstSipSolutions
+ * Author: Chris/Justin
+ * SD 15 - 2026
+ */
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
