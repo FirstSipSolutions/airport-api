@@ -1,5 +1,3 @@
-package airport;
-
 
 
 /*
@@ -7,6 +5,10 @@ package airport;
  * Author: Chris/Justin
  * SD 15 - 2026
  */
+
+package com.project.airport;
+
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ public class CityService {
     private CityRepository cityRepository;
 
     public Iterable<City> getAllCities() {
+
         return cityRepository.findAll();
     }
 
@@ -41,23 +44,33 @@ public class CityService {
     //creating city
     //will return city from repo
     public City createCity(City city) {
+
         return cityRepository.save(city);
     }
 
     public City updateCity(Long id, City cityDetails) {
         Optional<City> optionalCity = cityRepository.findById(id);
+
+        // City present
         if (optionalCity.isPresent()) {
+
+
             City city = optionalCity.get();
             city.setName(cityDetails.getName());
             city.setState(cityDetails.getState());
             city.setPopulation(cityDetails.getPopulation());
+
+
             return cityRepository.save(city);
+
+
         } else {
             return null;
         }
     }
 
     public void deleteCity(Long id) {
+
         cityRepository.deleteById(id);
     }
 }
