@@ -1,6 +1,5 @@
 package com.project.passenger;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.aircraft.Aircraft;
 import com.project.airport.City;
 import jakarta.persistence.Entity;
@@ -10,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
 
 import java.util.List;
 
@@ -26,8 +26,12 @@ public class Passenger {
     @JoinColumn(name = "city_id")
     private City city;
 
-    @ManyToMany(mappedBy = "aircraft")
-    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "passenger_aircraft",
+            joinColumns = @JoinColumn(name = "passenger_id"),
+            inverseJoinColumns = @JoinColumn(name = "aircraft_id")
+    )
     private List<Aircraft> aircraft;
 
     public Passenger(){
