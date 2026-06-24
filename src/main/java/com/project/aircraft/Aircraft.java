@@ -1,8 +1,3 @@
-package com.project.aircraft;
-
-import com.project.airport.Airport;
-
-
 
 /*
  * FirstSipSolutions
@@ -10,14 +5,17 @@ import com.project.airport.Airport;
  * SD 15 - 2026
  */
 
+package com.project.aircraft;
 
-
+import com.project.airport.Airport;
+import com.project.passenger.Passenger;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Id;
+
 import java.util.List;
 
 @Entity
@@ -31,6 +29,9 @@ public class Aircraft {
 
     @ManyToMany
     private List<Airport> airports;
+
+    @ManyToMany(mappedBy = "aircraft")
+    private List<Passenger> passengers;
 
     public Aircraft(){
     }
@@ -74,4 +75,13 @@ public class Aircraft {
     public void setAirports(List<Airport> airports) {
         this.airports = airports;
     }
+
+    public List<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
+
 }
