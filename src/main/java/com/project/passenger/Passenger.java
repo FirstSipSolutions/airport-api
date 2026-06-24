@@ -1,11 +1,15 @@
 package com.project.passenger;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.aircraft.Aircraft;
+import com.project.airport.City;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToOne;
 
 import java.util.List;
 
@@ -18,7 +22,12 @@ public class Passenger {
     private String lastName;
     private String phoneNumber;
 
-    @ManyToMany
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
+
+    @ManyToMany(mappedBy = "aircraft")
+    @JsonIgnore
     private List<Aircraft> aircraft;
 
     public Passenger(){
@@ -54,5 +63,21 @@ public class Passenger {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public List<Aircraft> getAircraft() {
+        return aircraft;
+    }
+
+    public void setAircraft(List<Aircraft> aircraft) {
+        this.aircraft = aircraft;
     }
 }
