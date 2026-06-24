@@ -7,6 +7,7 @@
 
 package com.project.aircraft;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.airport.Airport;
 import com.project.passenger.Passenger;
 
@@ -31,6 +32,7 @@ public class Aircraft {
     private List<Airport> airports;
 
     @ManyToMany(mappedBy = "aircraft")
+    @JsonIgnore
     private List<Passenger> passengers;
 
     public Aircraft(){
