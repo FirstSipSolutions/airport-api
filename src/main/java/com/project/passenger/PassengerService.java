@@ -10,7 +10,7 @@ public class PassengerService {
     @Autowired
     private PassengerRepository passengerRepository;
 
-    public List<Passenger> getAllPassenger(){
+    public List<Passenger> getAllPassengers(){
         return (List<Passenger>) passengerRepository.findAll();
     }
 
@@ -18,7 +18,6 @@ public class PassengerService {
         Optional<Passenger> existingPassenger = passengerRepository.findById(id);
 
         if (existingPassenger.isPresent()) {
-
             return existingPassenger.get();
         }
         return null;
