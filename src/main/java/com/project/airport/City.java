@@ -6,12 +6,17 @@
  * Author: Chris/Justin
  * SD 15 - 2026
  */
-package com.project.airport;
 
+
+package com.project.airport;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 
 @Entity
 
@@ -25,6 +30,11 @@ public class City {
     private String name;
     private String state;
     private int population;
+
+
+    @OneToMany(mappedBy = "city")
+    @JsonIgnore
+    private List<Airport> airports;
 
 
 
@@ -76,4 +86,21 @@ public class City {
 
         this.population = population;
     }
+
+    // added in these for the listing airport getting aiport
+    // getter and setter
+
+    public List<Airport> getAirports() {
+
+        return airports;
+
+    }
+
+    public void setAirports(List<Airport> airports) {
+
+        this.airports = airports;
+
+    }
+
+
 }
