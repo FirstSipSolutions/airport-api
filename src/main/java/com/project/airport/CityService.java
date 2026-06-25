@@ -7,10 +7,6 @@
  */
 
 package com.project.airport;
-
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +30,10 @@ public class CityService {
     public City getCityById(Long id) {
         Optional<City> city = cityRepository.findById(id);
         if (city.isPresent()) {
+
             return city.get();
         } else {
+
             return null;
         }
     }
@@ -45,15 +43,19 @@ public class CityService {
     //will return city from repo
     public City createCity(City city) {
 
+
         return cityRepository.save(city);
     }
 
     public City updateCity(Long id, City cityDetails) {
         Optional<City> optionalCity = cityRepository.findById(id);
 
-        // City present
+
+        // only update if a city with that id was actually found
+
         if (optionalCity.isPresent()) {
 
+            // copys the new values from the incoming details onto the existing city
 
             City city = optionalCity.get();
             city.setName(cityDetails.getName());
@@ -66,6 +68,7 @@ public class CityService {
 
         } else {
             return null;
+
         }
     }
 
