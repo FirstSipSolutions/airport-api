@@ -18,9 +18,12 @@ public class CityService {
     @Autowired
     private CityRepository cityRepository;
 
-    public Iterable<City> getAllCities() {
 
-        return cityRepository.findAll();
+
+
+    // Spring fills the Pageable in from the request, then it is passed to findAll.
+    public Page<City> getCitiesPaged(Pageable pageable) {
+        return cityRepository.findAll(pageable);
     }
 
 

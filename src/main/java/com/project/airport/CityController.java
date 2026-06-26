@@ -25,14 +25,15 @@ public class CityController {
     @Autowired
     private CityService cityService;
 
+// mewest addition for pagination here
 
-    // getting mapping here returns all of the cities
-    @GetMapping
-    public Iterable<City> getAllCities() {
-        return cityService.getAllCities();
+    // added this so cities can be requested a page at a time instead of all at once
+    // the Pageable gets filled from the url query params (?page= ?size= ?sort=)
+    @GetMapping("/paged")
+    public Page<City> getCitiesPaged(Pageable pageable) {
+        return cityService.getCitiesPaged(pageable);
     }
-    // handles GET to /api/cities/{id}
-    // pretty sure that will run smoothly
+
 
     // the id in the url is pulled in by @PathVariable
     // returns just the one city that matches that id
