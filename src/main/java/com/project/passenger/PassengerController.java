@@ -1,6 +1,8 @@
 package com.project.passenger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,18 +15,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/passenger")
+@RequestMapping("/api/passengers")
 @CrossOrigin
 public class PassengerController {
     @Autowired
     private PassengerService passengerService;
 
     @GetMapping
-    public ResponseEntity<List<Passenger>> getAllPassengers() {
-        List<Passenger> passenger = passengerService.getAllPassengers();
+    public ResponseEntity<Page<Passenger>> getAllPassengers(Pageable pageable) {
+        Page<Passenger> passenger = passengerService.getAllPassengers(pageable);
         if (passenger.isEmpty()){
             return ResponseEntity.notFound().build();
         }
@@ -34,7 +34,6 @@ public class PassengerController {
     @GetMapping("/{id}")
     public ResponseEntity<Passenger> getPassengerById(@PathVariable long id) {
         Passenger passengerToReturn = passengerService.getPassengerById(id);
-
         if(passengerToReturn == null){
             return ResponseEntity.notFound().build();
         }
@@ -50,11 +49,9 @@ public class PassengerController {
     @PutMapping("/{id}")
     public ResponseEntity<Passenger> updatePassenger(@PathVariable long id, @RequestBody Passenger passenger) {
         Passenger existingPassenger = passengerService.getPassengerById(id);
-
         if(existingPassenger == null){
             return ResponseEntity.notFound().build();
         }
-
         Passenger updatedPassenger = passengerService.updatePassenger(id, passenger);
         return ResponseEntity.ok(updatedPassenger);
     }
@@ -62,7 +59,6 @@ public class PassengerController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Passenger> deletePassenger(@PathVariable long id) {
         Passenger passengerToDelete =  passengerService.getPassengerById(id);
-
         if(passengerToDelete == null){
             return ResponseEntity.notFound().build();
         }
