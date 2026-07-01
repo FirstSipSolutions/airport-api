@@ -20,8 +20,10 @@ public class CityService {
     @Autowired
     private CityRepository cityRepository;
 
-
-
+// this is added because the cities were not being called and showed in Postman.
+    public Iterable<City> getAllCities() {
+        return cityRepository.findAll();
+    }
 
     // Spring fills the Pageable in from the request, then it is passed to findAll.
     public Page<City> getCitiesPaged(Pageable pageable) {

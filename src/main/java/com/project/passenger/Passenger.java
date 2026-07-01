@@ -22,9 +22,11 @@ public class Passenger {
     private String lastName;
     private String phoneNumber;
 
+
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
+
 
     @ManyToMany
     @JoinTable(
@@ -32,9 +34,11 @@ public class Passenger {
             joinColumns = @JoinColumn(name = "passenger_id"),
             inverseJoinColumns = @JoinColumn(name = "aircraft_id")
     )
+
     private List<Aircraft> aircraft;
 
     public Passenger(){
+
     }
 
     public long getId() {

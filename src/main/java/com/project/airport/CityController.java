@@ -27,7 +27,15 @@ public class CityController {
     @Autowired
     private CityService cityService;
 
-// mewest addition for pagination here
+
+    // adding a mapping as cities are not returning
+    // this will require a get mapping for ALL cities, hopefully ..
+
+
+
+
+
+
 
     // added this so cities can be requested a page at a time instead of all at once
     // the Pageable gets filled from the url query params (?page= ?size= ?sort=)
@@ -43,10 +51,27 @@ public class CityController {
     public City getCityById(@PathVariable Long id) {
         return cityService.getCityById(id);
     }
+
+
+
 // here the body request will take json sent
     // it then turns all of that into city objecxt
     //once that is object it can be saved and returns that exact saved city
     // holding a new ID .,. in a perfect world
+
+
+
+    // adding in a get mapping for returning all cities
+
+    @GetMapping
+    public Iterable<City> getAllCities() {
+        return cityService.getAllCities();
+    }
+
+
+
+
+
     @PostMapping
     public City createCity(@RequestBody City city) {
         return cityService.createCity(city);
@@ -58,7 +83,7 @@ public class CityController {
         return cityService.updateCity(id, city);
     }
 
-    // simple delete again
+
     @DeleteMapping("/{id}")
     public void deleteCity(@PathVariable Long id) {
         cityService.deleteCity(id);
