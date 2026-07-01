@@ -31,6 +31,10 @@ public class AircraftService {
     }
 
     public Aircraft updateAircraft(Long id,  Aircraft updateAircraft) {
+
+    // added in for debug purpose
+        System.out.println("Incoming airports: " + updateAircraft.getAirports());
+
         Optional<Aircraft> existingAircraft = aircraftRepository.findById(id);
 
         if (existingAircraft.isPresent()){
@@ -39,6 +43,7 @@ public class AircraftService {
             newAircraftData.setType(updateAircraft.getType());
             newAircraftData.setAirlineName(updateAircraft.getAirlineName());
             newAircraftData.setNumberOfPassengers(updateAircraft.getNumberOfPassengers());
+            newAircraftData.setAirports(updateAircraft.getAirports());
             return aircraftRepository.save(newAircraftData);
         } else {
             return null;
