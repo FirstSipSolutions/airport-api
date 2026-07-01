@@ -9,7 +9,6 @@
 
 
 package com.project.airport;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.OneToMany;
 import java.util.List;
 import jakarta.persistence.Entity;
@@ -33,7 +32,6 @@ public class City {
 
 
     @OneToMany(mappedBy = "city")
-    @JsonIgnore
     private List<Airport> airports;
 
 
