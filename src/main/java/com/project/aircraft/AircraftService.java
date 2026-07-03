@@ -12,6 +12,7 @@ import java.util.Optional;
 public class AircraftService {
     @Autowired
     private AircraftRepository aircraftRepository;
+    @Autowired
     private PassengerRepository passengerRepository;
 
     public AircraftService(PassengerRepository passengerRepository) {
