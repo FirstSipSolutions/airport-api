@@ -1,5 +1,7 @@
 package com.project.aircraft;
 
+import com.project.passenger.Passenger;
+import com.project.passenger.PassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,11 @@ import java.util.Optional;
 public class AircraftService {
     @Autowired
     private AircraftRepository aircraftRepository;
+    private PassengerRepository passengerRepository;
+
+    public AircraftService(PassengerRepository passengerRepository) {
+        this.passengerRepository = passengerRepository;
+    }
 
     public List<Aircraft> getAllAircraft(){
 
@@ -53,8 +60,15 @@ public class AircraftService {
     public void deleteAircraftById(Long id) {
         Optional<Aircraft> existingAircraft = aircraftRepository.findById(id);
 
-        if (existingAircraft.isPresent())
-            aircraftRepository.deleteById(id);
-    }
+        if (existingAircraft.isPresent()) {
+            Aircraft aircraftToDelete = existingAircraft.get();
+            List<Passenger> linkedPassengers = aircraftToDelete.getPassengers();
 
+            for(Passenger passenger : linkedPassengers){
+                passenger.getAircraft().remove(aircraftToDelete);
+                passengerRepository.save(passenger);
+            }
+            aircraftRepository.deleteById(id);
+        }
+    }
 }
