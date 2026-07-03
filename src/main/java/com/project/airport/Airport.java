@@ -27,6 +27,13 @@ public class Airport {
     private String name;
     private String code;
 
+
+    // each airport belongs to one city here
+    // @ManyToOne sets iut all up as a relationship
+
+    //many airports can point to one city
+
+
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private City city;

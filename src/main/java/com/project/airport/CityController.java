@@ -27,6 +27,7 @@ public class CityController {
     @Autowired
     private CityService cityService;
 
+<<<<<<< Updated upstream
 
     // adding a mapping as cities are not returning
     // this will require a get mapping for ALL cities, hopefully ..
@@ -36,9 +37,12 @@ public class CityController {
 
 
 
+=======
+    // mewest addition for pagination here
+>>>>>>> Stashed changes
 
     // added this so cities can be requested a page at a time instead of all at once
-    // the Pageable gets filled from the url query params (?page= ?size= ?sort=)
+    // the Pageable gets filled from the url query params (page size  sort)
     @GetMapping("/paged")
     public Page<City> getCitiesPaged(Pageable pageable) {
         return cityService.getCitiesPaged(pageable);
@@ -53,8 +57,12 @@ public class CityController {
     }
 
 
+<<<<<<< Updated upstream
 
 // here the body request will take json sent
+=======
+    // here the body request will take json sent
+>>>>>>> Stashed changes
     // it then turns all of that into city objecxt
     //once that is object it can be saved and returns that exact saved city
     // holding a new ID .,. in a perfect world
