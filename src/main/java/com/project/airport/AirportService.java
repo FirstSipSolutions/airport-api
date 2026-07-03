@@ -7,9 +7,12 @@
 package com.project.airport;
 
 // imports for spring and such
+import com.project.aircraft.Aircraft;
+import com.project.aircraft.AircraftRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -20,6 +23,8 @@ public class AirportService {
 
     @Autowired
     private AirportRepository airportRepository;
+    @Autowired
+    private AircraftRepository aircraftRepository;
 
 
     // here the code grabs from repoistory andreturnss
@@ -82,7 +87,17 @@ public class AirportService {
 
     // this is a simple deletion
     public void deleteAirport(Long id) {
+        Optional<Airport> existingAirport = airportRepository.findById(id);
 
+        if(existingAirport.isPresent()){
+            Airport airportToDelete = existingAirport.get();
+            List<Aircraft> linkedAircraft = aircraftRepository.findByAirportsId(id);
+
+            for(Aircraft aircraft : linkedAircraft){
+                aircraft.getAirports().remove(airportToDelete);
+                aircraftRepository.save(aircraft);
+            }
+        }
         airportRepository.deleteById(id);
     }
 }
