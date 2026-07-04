@@ -1,7 +1,7 @@
 package com.project.passenger;
 
 import com.project.aircraft.Aircraft;
-import com.project.airport.City;
+import com.project.city.City;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
