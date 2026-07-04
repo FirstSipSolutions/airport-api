@@ -8,7 +8,8 @@
  */
 
 
-package com.project.airport;
+package com.project.city;
+import com.project.airport.Airport;
 import jakarta.persistence.OneToMany;
 import java.util.List;
 import jakarta.persistence.Entity;

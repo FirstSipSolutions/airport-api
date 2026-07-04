@@ -6,13 +6,11 @@
  * Author: Chris/Justin
  * SD 15 - 2026
  */
-package com.project.airport;
+package com.project.city;
 
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.CrudRepository;
-
 
 
 //Pagination was added to the City endpoint because cities are reference data that grows over time

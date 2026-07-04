@@ -6,7 +6,7 @@
  * SD 15 - 2026
  */
 
-package com.project.airport;
+package com.project.city;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

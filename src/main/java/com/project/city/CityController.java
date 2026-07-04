@@ -3,7 +3,7 @@
  * Author: Chris/Justin
  * SD 15 - 2026
  */
-package com.project.airport;
+package com.project.city;
 
 // imprts here
 // will add in some more imports for many to many
