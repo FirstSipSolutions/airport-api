@@ -1,0 +1,22 @@
+# Question Documentation
+
+
+## Chris (Questions 2 and 3) .. using a MD file to format this in github as it was tangely getting that pdf to work in browser.
+
+**Question 2 — aircraft per passenger**
+The CLI calls the passengers endpoint, then for each passenger it lists the aircraft they have flown on. The passenger data comes back with its aircraft list nested inside.
+
+**Question 3 — airports per aircraft**
+The CLI calls the aircraft endpoint and prints each aircraft with the airports it uses.
+
+## Things That Were Tricky
+
+**Paged vs plain responses**
+The passengers endpoint returns data wrapped in a "content" object because it is paginated. The aircraft endpoint returns a plain array. I had to write the parsing differently for each so both would map correctly.
+
+**Relationships not saving**
+At first the aircraft and passenger links came back empty. The API update methods were not saving the relationship lists, so I added the missing setter calls on the API side and then the links showed up.
+
+**Testing with mocking**
+I used JUnit and Mockito to test without a live API. The HTTP client is mocked so I feed it fake JSON and check my code parses it into the right objects.
+
