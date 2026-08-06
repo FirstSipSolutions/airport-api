@@ -22,7 +22,7 @@ public class PassengerController {
     @Autowired
     private PassengerService passengerService;
 
-    @GetMapping
+    @GetMapping("/getall")
     public ResponseEntity<Page<Passenger>> getAllPassengers(Pageable pageable) {
         Page<Passenger> passenger = passengerService.getAllPassengers(pageable);
         if (passenger.isEmpty()){
@@ -31,7 +31,7 @@ public class PassengerController {
         return ResponseEntity.ok(passenger);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/findby/id/{id}")
     public ResponseEntity<Passenger> getPassengerById(@PathVariable long id) {
         Passenger passengerToReturn = passengerService.getPassengerById(id);
         if(passengerToReturn == null){
@@ -40,13 +40,13 @@ public class PassengerController {
         return ResponseEntity.ok(passengerToReturn);
     }
 
-    @PostMapping
+    @PostMapping("/createnew")
     public ResponseEntity<Passenger> createPassenger(@RequestBody Passenger passenger){
         Passenger newPassenger = passengerService.createPassenger(passenger);
         return ResponseEntity.status(HttpStatus.CREATED).body(newPassenger);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/id/{id}")
     public ResponseEntity<Passenger> updatePassenger(@PathVariable long id, @RequestBody Passenger passenger) {
         Passenger existingPassenger = passengerService.getPassengerById(id);
         if(existingPassenger == null){
@@ -56,7 +56,7 @@ public class PassengerController {
         return ResponseEntity.ok(updatedPassenger);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/id/{id}")
     public ResponseEntity<Passenger> deletePassenger(@PathVariable long id) {
         Passenger passengerToDelete =  passengerService.getPassengerById(id);
         if(passengerToDelete == null){
