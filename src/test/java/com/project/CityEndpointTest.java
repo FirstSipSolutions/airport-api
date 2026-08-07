@@ -35,7 +35,7 @@ public class CityEndpointTest extends BaseControllerTest {
     public void setUpTestData() {
         testCity = new City();
 
-        testCity.setId(5);
+        testCity.setId(5L);
         testCity.setName("Deer Lake");
         testCity.setState("Newfoundland");
         testCity.setPopulation(8567);
@@ -82,7 +82,7 @@ public class CityEndpointTest extends BaseControllerTest {
 
         mockMvc.perform(get("/api/cities/findby/id/5"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value(5));
+                .andExpect(jsonPath("id").value(5));
     }
 
     @Test
@@ -132,7 +132,7 @@ public class CityEndpointTest extends BaseControllerTest {
         Mockito.when(cityRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.empty());
 
-        mockMvc.perform(put("/api/cities/update/id/99") // Using 99 to represent a non-existent ID
+        mockMvc.perform(put("/api/cities/update/id/99")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(parseCityToJson))
                 .andExpect(status().isNotFound());
