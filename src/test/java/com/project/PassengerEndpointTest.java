@@ -36,12 +36,12 @@ public class PassengerEndpointTest extends BaseControllerTest {
 
     @BeforeEach
     public void setUpTestData() {
-        testCity.setId(2);
+        testCity.setId(2L);
         testCity.setName("St. John's");
         testCity.setState("Newfoundland");
         testCity.setPopulation(357829);
 
-        testPassenger.setId(1);
+        testPassenger.setId(1L);
         testPassenger.setFirstName("Rusty");
         testPassenger.setLastName("Shakleford");
         testPassenger.setPhoneNumber("7093211234");

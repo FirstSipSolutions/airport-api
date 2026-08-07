@@ -30,7 +30,7 @@ public class AirportService {
     // here the code grabs from repoistory andreturnss
     // all airports, from the repo get taken  in
 
-    public Iterable<Airport> getAllAirports() {
+    public List<Airport> getAllAirports() {
         return airportRepository.findAll();
     }
 
@@ -86,7 +86,7 @@ public class AirportService {
 
 
     // this is a simple deletion
-    public void deleteAirport(Long id) {
+    public Airport deleteAirport(Long id) {
         Optional<Airport> existingAirport = airportRepository.findById(id);
 
         if(existingAirport.isPresent()){
@@ -96,8 +96,11 @@ public class AirportService {
             for(Aircraft aircraft : linkedAircraft){
                 aircraft.getAirports().remove(airportToDelete);
                 aircraftRepository.save(aircraft);
+
             }
+            airportRepository.deleteById(id);
+            return airportToDelete;
         }
-        airportRepository.deleteById(id);
+        return null;
     }
 }
