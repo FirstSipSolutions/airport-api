@@ -1,12 +1,7 @@
 package com.project;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.aircraft.Aircraft;
-import com.project.aircraft.AircraftRepository;
-import com.project.airport.Airport;
-import com.project.airport.AirportRepository;
+
 import com.project.city.City;
-import com.project.city.CityRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -15,12 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import com.project.passenger.Passenger;
 import com.project.passenger.PassengerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,30 +26,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class APIEndpointTests {
-
-    @Autowired
-    private MockMvc             mockMvc;
-
-    @Autowired
-    private ObjectMapper        objectMapper;
+public class PassengerEndpointTest extends BaseControllerTest {
 
     @MockBean
     private PassengerRepository passengerRepository;
 
-    @MockBean
-    private AircraftRepository  aircraftRepository;
-
-    @MockBean
-    private CityRepository      cityRepository;
-
-    @MockBean
-    private AirportRepository   airportRepository;
-
     private final Passenger     testPassenger = new Passenger();
     private final City          testCity = new City();
-    private final Airport       testAirport = new Airport();
-    private final Aircraft      testAircraft = new Aircraft();
 
     @BeforeEach
     public void setUpTestData() {
@@ -102,7 +78,7 @@ public class APIEndpointTests {
 
         mockMvc.perform(get("/api/passengers/findby/id/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("id").value(1));
+                .andExpect(jsonPath("$.id").value(1));
     }
 
     @Test
@@ -125,7 +101,7 @@ public class APIEndpointTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(parsePassengerToJson))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("id").value(1));
+                .andExpect(jsonPath("$.id").value(1));
     }
 
     @Test
@@ -142,7 +118,7 @@ public class APIEndpointTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(parsePassengerToJson))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("id").value(1));
+                .andExpect(jsonPath("$.id").value(1));
     }
 
     @Test
