@@ -8,11 +8,8 @@
  */
 package com.project.airport;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface AirportRepository extends CrudRepository<Airport, Long> {
-
-
-
+public interface AirportRepository extends JpaRepository<Airport, Long> {
 }
