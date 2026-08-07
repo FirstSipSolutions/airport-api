@@ -25,7 +25,7 @@ public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String name;
     private String state;
@@ -47,7 +47,7 @@ public class City {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
 
 
         this.id = id;
