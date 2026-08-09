@@ -23,7 +23,7 @@ import java.util.List;
 public class Aircraft {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String type;
     private String airlineName;
     private int numberOfPassengers;
@@ -38,11 +38,11 @@ public class Aircraft {
     public Aircraft(){
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
