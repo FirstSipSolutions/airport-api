@@ -39,10 +39,6 @@ public class AircraftService {
     }
 
     public Aircraft updateAircraft(Long id,  Aircraft updateAircraft) {
-
-    // added in for debug purpose
-        System.out.println("Incoming airports: " + updateAircraft.getAirports());
-
         Optional<Aircraft> existingAircraft = aircraftRepository.findById(id);
 
         if (existingAircraft.isPresent()){
