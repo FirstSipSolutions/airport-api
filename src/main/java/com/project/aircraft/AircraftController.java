@@ -22,29 +22,40 @@ public class AircraftController {
     @Autowired
     private AircraftService aircraftService;
 
-    @GetMapping
+    @GetMapping("/findall")
     public ResponseEntity<List<Aircraft>> getAllAircraft() {
         List<Aircraft> aircraft = aircraftService.getAllAircraft();
+
+        if(aircraft == null){
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.ok(aircraft);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/findby/id/{id}")
     public ResponseEntity<Aircraft> getAircraftById(@PathVariable long id) {
         Aircraft aircraftToReturn = aircraftService.getAircraftById(id);
 
         if(aircraftToReturn == null){
             return ResponseEntity.notFound().build();
         }
+
         return ResponseEntity.ok(aircraftToReturn);
     }
 
-    @PostMapping
+    @PostMapping("/createnew")
     public ResponseEntity<Aircraft> createAircraft(@RequestBody Aircraft aircraft){
         Aircraft newAircraft = aircraftService.createAircraft(aircraft);
+
+        if(newAircraft == null){
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(newAircraft);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateby/id/{id}")
     public ResponseEntity<Aircraft> updateAircraft(@PathVariable long id, @RequestBody Aircraft aircraft) {
         Aircraft existingAircraft = aircraftService.getAircraftById(id);
 
@@ -53,16 +64,17 @@ public class AircraftController {
         }
 
         Aircraft updatedAircraft = aircraftService.updateAircraft(id, aircraft);
-        return ResponseEntity.ok(updatedAircraft);
+        return ResponseEntity.status(HttpStatus.CREATED).body(updatedAircraft);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Aircraft> deleteAircraft(@PathVariable long id) {
+    @DeleteMapping("/deleteby/id/{id}")
+    public ResponseEntity<Aircraft> deleteAircraft(@PathVariable Long id) {
         Aircraft aircraftToDelete =  aircraftService.getAircraftById(id);
 
         if(aircraftToDelete == null){
             return ResponseEntity.notFound().build();
         }
+
         aircraftService.deleteAircraftById(id);
         return ResponseEntity.noContent().build();
     }
