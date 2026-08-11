@@ -1,5 +1,6 @@
 package com.project.flight;
 
+import com.project.passenger.Passenger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,15 @@ public class FlightController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(listOfFlights);
+    }
+
+    @GetMapping("/findby/id/{id}")
+    public ResponseEntity<Flight> getFlightById(@PathVariable Long id) {
+        Flight flightToReturn = flightService.getFlightById(id);
+        if(flightToReturn == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(flightToReturn);
     }
 
     @GetMapping("/departure/airportid/{airportId}")
@@ -65,7 +75,6 @@ public class FlightController {
         if(flightToDelete == null){
             return ResponseEntity.notFound().build();
         }
-        flightService.deleteFlight(id);
         return ResponseEntity.noContent().build();
     }
 }
