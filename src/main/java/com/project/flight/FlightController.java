@@ -25,16 +25,16 @@ public class FlightController {
 
     @GetMapping("/departure/airportid/{airportId}")
     public ResponseEntity<List<Flight>> getDeparturesByAirportId(@PathVariable Long airportId) {
-        List<Flight> departures = flightService.getDepartureById(airportId);
+        List<Flight> departures = flightService.getDepartures(airportId);
         if(departures == null){
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(departures);
     }
 
-    @GetMapping("/arriavle/airportid/{airportId}")
+    @GetMapping("/arrival/airportid/{airportId}")
     public ResponseEntity<List<Flight>> getArrivalsByAirportId(@PathVariable Long airportId) {
-        List<Flight> arrivals = flightService.getArrivalById(airportId);
+        List<Flight> arrivals = flightService.getArrivals(airportId);
         if(arrivals == null){
             return ResponseEntity.notFound().build();
         }
