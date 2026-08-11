@@ -5,19 +5,20 @@ import com.project.airport.Airport;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Flight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long      id;
-    private String    flightNumber;
-    private LocalDate arrival;
-    private LocalDate departure;
-    private String    status;
-    private String    gate;
-    private String    terminal;
+    private Long          id;
+    private String        flightNumber;
+    private LocalDateTime arrival;
+    private LocalDateTime departure;
+    private String        status;
+    private String        gate;
+    private String        terminal;
 
     @ManyToOne
     private Aircraft aircraft;
@@ -49,19 +50,19 @@ public class Flight {
         this.flightNumber = flightNumber;
     }
 
-    public LocalDate getArrival() {
+    public LocalDateTime getArrival() {
         return arrival;
     }
 
-    public void setArrival(LocalDate arrival) {
+    public void setArrival(LocalDateTime arrival) {
         this.arrival = arrival;
     }
 
-    public LocalDate getDeparture() {
+    public LocalDateTime getDeparture() {
         return departure;
     }
 
-    public void setDeparture(LocalDate departure) {
+    public void setDeparture(LocalDateTime departure) {
         this.departure = departure;
     }
 
