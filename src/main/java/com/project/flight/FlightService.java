@@ -26,11 +26,10 @@ public class FlightService {
 
     public Flight getFlightById(Long id){
         Optional<Flight> existingFlight = flightRepository.findById(id);
-
-        if (existingFlight.isPresent()) {
-            return existingFlight.get();
+        if (existingFlight == null){
+            return null;
         }
-        return null;
+        return existingFlight.get();
     }
 
     public Flight updateFlight(Long id, Flight updateFlight) {
@@ -56,7 +55,6 @@ public class FlightService {
         if (existingFlight.isPresent()){
             flightRepository.deleteById(id);
         }
-
     }
 
     public List<Flight> getDepartures(Long airportId){
@@ -66,7 +64,6 @@ public class FlightService {
             System.out.println("Airport not found");
             return null;
         }
-
         return flightRepository.findByAirportDeparture(airportDepartures);
     }
 
@@ -77,7 +74,6 @@ public class FlightService {
             System.out.println("Airport not found");
             return null;
         }
-
         return flightRepository.findByAirportArrival(airportArrivals);
     }
 }

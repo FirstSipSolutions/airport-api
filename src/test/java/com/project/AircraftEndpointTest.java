@@ -2,7 +2,6 @@ package com.project;
 
 import com.project.aircraft.Aircraft;
 import com.project.aircraft.AircraftRepository;
-import com.project.airport.Airport;
 import com.project.passenger.Passenger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
