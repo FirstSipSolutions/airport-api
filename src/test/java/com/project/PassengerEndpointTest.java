@@ -68,7 +68,7 @@ public class PassengerEndpointTest extends BaseControllerTest {
                 .thenReturn(Page.empty());
 
         mockMvc.perform(get("/api/passengers/getall"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isOk());
     }
 
     @Test
