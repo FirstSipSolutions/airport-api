@@ -25,9 +25,6 @@ public class PassengerController {
     @GetMapping("/getall")
     public ResponseEntity<Page<Passenger>> getAllPassengers(Pageable pageable) {
         Page<Passenger> passenger = passengerService.getAllPassengers(pageable);
-        if (passenger.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(passenger);
     }
 

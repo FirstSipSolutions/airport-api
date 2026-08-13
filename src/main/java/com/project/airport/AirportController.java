@@ -42,9 +42,6 @@ public class AirportController {
     @GetMapping("/getall")
     public ResponseEntity<List<Airport>> getAllAirports() {
         List<Airport> listOfAirports = airportService.getAllAirports();
-        if(listOfAirports == null){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(listOfAirports);
     }
 
@@ -66,6 +63,7 @@ public class AirportController {
     @PostMapping("/createnew")
     public ResponseEntity<Airport> createAirport(@RequestBody Airport airport) {
         Airport newAirport = airportService.createAirport(airport);
+
         if(newAirport == null){
             return ResponseEntity.notFound().build();
         }
@@ -78,6 +76,7 @@ public class AirportController {
     @PutMapping("/update/id/{id}")
     public ResponseEntity<Airport> updateAirport(@PathVariable Long id, @RequestBody Airport airport) {
         Airport airportToUpdate = airportService.updateAirport(id,airport);
+
         if(airportToUpdate == null){
             return ResponseEntity.notFound().build();
         }
@@ -89,6 +88,7 @@ public class AirportController {
     @DeleteMapping("/delete/id/{id}")
     public ResponseEntity<Airport> deleteAirport(@PathVariable Long id) {
         Airport airportToDelete = airportService.deleteAirport(id);
+
         if(airportToDelete == null){
             return ResponseEntity.notFound().build();
         }

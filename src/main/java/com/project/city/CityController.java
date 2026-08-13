@@ -40,9 +40,6 @@ public class CityController {
     @GetMapping("/getall/paged")
     public ResponseEntity<Page<City>> getCitiesPaged(Pageable pageable) {
         Page<City> city = cityService.getCitiesPaged(pageable);
-        if(city.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(city);
     }
 
@@ -69,9 +66,6 @@ public class CityController {
     @GetMapping("/getall")
     public ResponseEntity<Iterable<City>> getAllCities() {
         Iterable<City> citiesToReturn = cityService.getAllCities();
-        if(citiesToReturn == null){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(citiesToReturn);
     }
 
