@@ -25,11 +25,6 @@ public class AircraftController {
     @GetMapping("/findall")
     public ResponseEntity<List<Aircraft>> getAllAircraft() {
         List<Aircraft> aircraft = aircraftService.getAllAircraft();
-
-        if(aircraft == null){
-            return ResponseEntity.notFound().build();
-        }
-
         return ResponseEntity.ok(aircraft);
     }
 
@@ -40,7 +35,6 @@ public class AircraftController {
         if(aircraftToReturn == null){
             return ResponseEntity.notFound().build();
         }
-
         return ResponseEntity.ok(aircraftToReturn);
     }
 
@@ -51,7 +45,6 @@ public class AircraftController {
         if(newAircraft == null){
             return ResponseEntity.notFound().build();
         }
-
         return ResponseEntity.status(HttpStatus.CREATED).body(newAircraft);
     }
 
@@ -62,7 +55,6 @@ public class AircraftController {
         if(existingAircraft == null){
             return ResponseEntity.notFound().build();
         }
-
         Aircraft updatedAircraft = aircraftService.updateAircraft(id, aircraft);
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedAircraft);
     }
@@ -74,7 +66,6 @@ public class AircraftController {
         if(aircraftToDelete == null){
             return ResponseEntity.notFound().build();
         }
-
         aircraftService.deleteAircraftById(id);
         return ResponseEntity.noContent().build();
     }

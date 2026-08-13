@@ -18,9 +18,6 @@ public class FlightController {
     @GetMapping("/findall")
     public ResponseEntity<List<Flight>> getAllFlights() {
         List<Flight> listOfFlights = flightService.getAllFlights();
-        if(listOfFlights == null){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(listOfFlights);
     }
 
