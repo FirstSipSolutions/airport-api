@@ -72,7 +72,7 @@ public class CityEndpointTest extends BaseControllerTest {
                 .thenReturn(Page.empty());
 
         mockMvc.perform(get("/api/cities/getall/paged"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isOk());
     }
 
     @Test

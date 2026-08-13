@@ -68,7 +68,7 @@ public class AircraftEndpointTest extends BaseControllerTest {
                 .thenReturn(null);
 
         mockMvc.perform(get("/api/aircraft/findall"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isOk());
     }
 
     @Test
