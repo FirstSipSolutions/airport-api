@@ -1,6 +1,6 @@
 # Airport API
 
-A Spring Boot REST API for an airport system — manages cities, airports, passengers, and aircraft, with full CRUD and relationships. Backed by MySQL.
+A Spring Boot REST API for an airport system — manages cities, airports, passengers, aircraft, and flight with full CRUD and relationships. Backed by MySQL.
 
 ## How to run
 
@@ -16,6 +16,7 @@ All support GET, POST, PUT, DELETE:
 - `/api/airports`
 - `/api/passengers`
 - `/api/aircraft`
+- `/api/flights/`
 
 Pagination + sorting: `/api/cities/paged?page=0&size=2&sort=name,asc`
 
@@ -24,7 +25,10 @@ Pagination + sorting: `/api/cities/paged?page=0&size=2&sort=name,asc`
 - City → many Airports
 - Passenger ↔ Aircraft (many-to-many)
 - Aircraft ↔ Airport (many-to-many)
-
+- Flight ← Aircraft (many-to-one)
+- Flight ← Airport Arrivals (many-to-one)
+- Flight ← Airport Departures (many-to-one)
+- 
 ## Team
 
 FirstSipSolutions — Chris & Justin, SD 15, 2026

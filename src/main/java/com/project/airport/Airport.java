@@ -11,11 +11,10 @@
 package com.project.airport;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.city.City;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import com.project.flight.Flight;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Airport {
@@ -30,6 +29,12 @@ public class Airport {
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private City city;
+
+    @OneToMany(mappedBy = "airportArrival")
+    private List<Flight> arrivingFlights;
+
+    @OneToMany(mappedBy = "airportDeparture")
+    private List<Flight> departingFlights;
 
     public Airport() {
     }
