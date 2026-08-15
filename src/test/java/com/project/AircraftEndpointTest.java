@@ -23,6 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -56,7 +57,8 @@ public class AircraftEndpointTest extends BaseControllerTest {
         Mockito.when(aircraftRepository.findAll())
                 .thenReturn(testAircraftList);
 
-        mockMvc.perform(get("/api/aircraft/findall"))
+        mockMvc.perform(get("/api/aircraft/findall")
+                .with(jwt()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("[0].id").value(7));
@@ -67,7 +69,8 @@ public class AircraftEndpointTest extends BaseControllerTest {
         Mockito.when(aircraftRepository.findAll())
                 .thenReturn(null);
 
-        mockMvc.perform(get("/api/aircraft/findall"))
+        mockMvc.perform(get("/api/aircraft/findall")
+                .with(jwt()))
                 .andExpect(status().isOk());
     }
 
@@ -76,7 +79,8 @@ public class AircraftEndpointTest extends BaseControllerTest {
         Mockito.when(aircraftRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.of(testAircraft));
 
-        mockMvc.perform(get("/api/aircraft/findby/id/7"))
+        mockMvc.perform(get("/api/aircraft/findby/id/7")
+                .with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(7));
     }
@@ -86,7 +90,8 @@ public class AircraftEndpointTest extends BaseControllerTest {
         Mockito.when(aircraftRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.empty());
 
-        mockMvc.perform(get("/api/aircraft/findby/id/98"))
+        mockMvc.perform(get("/api/aircraft/findby/id/98")
+                .with(jwt()))
                 .andExpect(status().isNotFound());
     }
 
@@ -116,7 +121,8 @@ public class AircraftEndpointTest extends BaseControllerTest {
 
         mockMvc.perform(put("/api/aircraft/updateby/id/7")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(parseAircraftToJson))
+                .content(parseAircraftToJson)
+                .with(jwt()))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(7));
     }
@@ -130,7 +136,8 @@ public class AircraftEndpointTest extends BaseControllerTest {
 
         mockMvc.perform(put("/api/aircraft/update/id/98")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(parseAircraftToJson))
+                .content(parseAircraftToJson)
+                .with(jwt()))
                 .andExpect(status().isNotFound());
     }
 
@@ -139,7 +146,8 @@ public class AircraftEndpointTest extends BaseControllerTest {
         Mockito.when(aircraftRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.of(testAircraft));
 
-        mockMvc.perform(delete("/api/aircraft/deleteby/id/7"))
+        mockMvc.perform(delete("/api/aircraft/deleteby/id/7")
+                .with(jwt()))
                 .andExpect(status().isNoContent());
     }
 
@@ -148,7 +156,8 @@ public class AircraftEndpointTest extends BaseControllerTest {
         Mockito.when(aircraftRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.empty());
 
-        mockMvc.perform(delete("/api/airports/delete/id/98"))
+        mockMvc.perform(delete("/api/airports/delete/id/98")
+                .with(jwt()))
                 .andExpect(status().isNotFound());
     }
 
