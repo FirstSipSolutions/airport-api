@@ -20,6 +20,7 @@ import java.util.Optional;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -51,7 +52,8 @@ public class CityEndpointTest extends BaseControllerTest {
         Mockito.when(cityRepository.findAll(ArgumentMatchers.any(org.springframework.data.domain.Pageable.class)))
                 .thenReturn(testPage);
 
-        mockMvc.perform(get("/api/cities/getall/paged"))
+        mockMvc.perform(get("/api/cities/getall/paged")
+                .with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].id").value(5));
     }
@@ -61,7 +63,8 @@ public class CityEndpointTest extends BaseControllerTest {
         Mockito.when(cityRepository.findAll())
                 .thenReturn(testCityList);
 
-        mockMvc.perform(get("/api/cities/getall"))
+        mockMvc.perform(get("/api/cities/getall")
+                .with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("[0].id").value(5));
     }
@@ -71,7 +74,8 @@ public class CityEndpointTest extends BaseControllerTest {
         Mockito.when(cityRepository.findAll(ArgumentMatchers.any(org.springframework.data.domain.Pageable.class)))
                 .thenReturn(Page.empty());
 
-        mockMvc.perform(get("/api/cities/getall/paged"))
+        mockMvc.perform(get("/api/cities/getall/paged")
+                .with(jwt()))
                 .andExpect(status().isOk());
     }
 
@@ -80,7 +84,8 @@ public class CityEndpointTest extends BaseControllerTest {
         Mockito.when(cityRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.of(testCity));
 
-        mockMvc.perform(get("/api/cities/findby/id/5"))
+        mockMvc.perform(get("/api/cities/findby/id/5")
+                .with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(5));
     }
@@ -90,7 +95,8 @@ public class CityEndpointTest extends BaseControllerTest {
         Mockito.when(cityRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.empty());
 
-        mockMvc.perform(get("/api/cities/findby/id/99"))
+        mockMvc.perform(get("/api/cities/findby/id/99")
+                .with(jwt()))
                 .andExpect(status().isNotFound());
     }
 
@@ -103,7 +109,8 @@ public class CityEndpointTest extends BaseControllerTest {
 
         mockMvc.perform(post("/api/cities/createnew")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(parseCityToJson))
+                .content(parseCityToJson)
+                .with(jwt()))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(5));
     }
@@ -120,7 +127,8 @@ public class CityEndpointTest extends BaseControllerTest {
 
         mockMvc.perform(put("/api/cities/update/id/5")
                  .contentType(MediaType.APPLICATION_JSON)
-                .content(parseCityToJson))
+                .content(parseCityToJson)
+                .with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(5));
     }
@@ -134,7 +142,8 @@ public class CityEndpointTest extends BaseControllerTest {
 
         mockMvc.perform(put("/api/cities/update/id/99")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(parseCityToJson))
+                .content(parseCityToJson)
+                .with(jwt()))
                 .andExpect(status().isNotFound());
     }
 
@@ -143,7 +152,8 @@ public class CityEndpointTest extends BaseControllerTest {
         Mockito.when(cityRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.of(testCity));
 
-        mockMvc.perform(delete("/api/cities/delete/id/5"))
+        mockMvc.perform(delete("/api/cities/delete/id/5")
+                .with(jwt()))
                 .andExpect(status().isNoContent());
     }
 
@@ -152,7 +162,8 @@ public class CityEndpointTest extends BaseControllerTest {
         Mockito.when(cityRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.empty());
 
-        mockMvc.perform(delete("/api/cities/delete/id/99"))
+        mockMvc.perform(delete("/api/cities/delete/id/99")
+                .with(jwt()))
                 .andExpect(status().isNotFound());
     }
 }
