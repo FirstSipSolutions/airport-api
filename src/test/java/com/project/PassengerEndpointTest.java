@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 
 import java.util.Collections;
 import java.util.List;
@@ -57,7 +58,8 @@ public class PassengerEndpointTest extends BaseControllerTest {
     @Test
     public void testGetAllPassengers() throws Exception {
 
-        mockMvc.perform(get("/api/passengers/getall"))
+        mockMvc.perform(get("/api/passengers/getall")
+                .with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].id").value(1));
     }
@@ -67,7 +69,8 @@ public class PassengerEndpointTest extends BaseControllerTest {
         Mockito.when(passengerRepository.findAll(ArgumentMatchers.any(org.springframework.data.domain.Pageable.class)))
                 .thenReturn(Page.empty());
 
-        mockMvc.perform(get("/api/passengers/getall"))
+        mockMvc.perform(get("/api/passengers/getall")
+                .with(jwt()))
                 .andExpect(status().isOk());
     }
 
@@ -76,7 +79,8 @@ public class PassengerEndpointTest extends BaseControllerTest {
         Mockito.when(passengerRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.of(testPassenger));
 
-        mockMvc.perform(get("/api/passengers/findby/id/1"))
+        mockMvc.perform(get("/api/passengers/findby/id/1")
+                .with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1));
     }
@@ -86,7 +90,8 @@ public class PassengerEndpointTest extends BaseControllerTest {
         Mockito.when(passengerRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.empty());
 
-        mockMvc.perform(get("/api/passengers/findby/id/1"))
+        mockMvc.perform(get("/api/passengers/findby/id/1")
+                .with(jwt()))
                 .andExpect(status().isNotFound());
     }
 
@@ -99,7 +104,8 @@ public class PassengerEndpointTest extends BaseControllerTest {
 
         mockMvc.perform(post("/api/passengers/createnew")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(parsePassengerToJson))
+                .content(parsePassengerToJson)
+                .with(jwt()))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1));
     }
@@ -116,7 +122,8 @@ public class PassengerEndpointTest extends BaseControllerTest {
 
         mockMvc.perform(put("/api/passengers/update/id/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(parsePassengerToJson))
+                .content(parsePassengerToJson)
+                .with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1));
     }
@@ -130,7 +137,8 @@ public class PassengerEndpointTest extends BaseControllerTest {
 
         mockMvc.perform(put("/api/passengers/update/id/5")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(parsePassengerToJson))
+                .content(parsePassengerToJson)
+                .with(jwt()))
                 .andExpect(status().isNotFound());
     }
 
@@ -139,7 +147,8 @@ public class PassengerEndpointTest extends BaseControllerTest {
         Mockito.when(passengerRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.of(testPassenger));
 
-        mockMvc.perform(delete("/api/passengers/delete/id/1"))
+        mockMvc.perform(delete("/api/passengers/delete/id/1")
+                .with(jwt()))
                 .andExpect(status().isNoContent());
     }
 
@@ -148,7 +157,8 @@ public class PassengerEndpointTest extends BaseControllerTest {
         Mockito.when(passengerRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.empty());
 
-        mockMvc.perform(delete("/api/passengers/delete/id/5"))
+        mockMvc.perform(delete("/api/passengers/delete/id/5")
+                .with(jwt()))
                 .andExpect(status().isNotFound());
     }
 }

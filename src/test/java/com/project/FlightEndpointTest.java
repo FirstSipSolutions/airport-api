@@ -2,7 +2,6 @@ package com.project;
 
 import com.project.flight.Flight;
 import com.project.flight.FlightService;
-import jakarta.persistence.Id;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -15,7 +14,6 @@ import org.springframework.http.MediaType;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -23,6 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 
 @SpringBootTest
     @AutoConfigureMockMvc
@@ -55,7 +54,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         Mockito.when(flightService.getAllFlights())
                 .thenReturn(testFlightList);
 
-        mockMvc.perform(get("/api/flight/findall"))
+        mockMvc.perform(get("/api/flight/findall")
+                .with(jwt()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("[0].id").value(21));
@@ -66,7 +66,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         Mockito.when(flightService.getAllFlights())
                 .thenReturn(null);
 
-        mockMvc.perform(get("/api/flight/findall"))
+        mockMvc.perform(get("/api/flight/findall")
+                .with(jwt()))
                 .andExpect(status().isOk());
     }
 
@@ -75,7 +76,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         Mockito.when(flightService.getFlightById(ArgumentMatchers.any()))
                 .thenReturn(testFlight);
 
-        mockMvc.perform(get("/api/flight/findby/id/21"))
+        mockMvc.perform(get("/api/flight/findby/id/21")
+                .with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(21));
     }
@@ -85,7 +87,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         Mockito.when(flightService.getFlightById(ArgumentMatchers.any()))
                 .thenReturn(null);
 
-        mockMvc.perform(get("/api/flight/findby/id/98"))
+        mockMvc.perform(get("/api/flight/findby/id/98")
+                .with(jwt()))
                 .andExpect(status().isNotFound());
     }
 
@@ -98,7 +101,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
         mockMvc.perform(post("/api/flight/createnew")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(parseFlightToJson))
+                .content(parseFlightToJson)
+                .with(jwt()))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(21));
     }
@@ -115,7 +119,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
         mockMvc.perform(put("/api/flight/update/id/21")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(parseFlightToJson))
+                .content(parseFlightToJson)
+                .with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(21));
     }
@@ -129,7 +134,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
         mockMvc.perform(put("/api/flight/update/id/98")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(parseFlightToJson))
+                .content(parseFlightToJson)
+                .with(jwt()))
                 .andExpect(status().isNotFound());
     }
 
@@ -138,7 +144,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         Mockito.when(flightService.getFlightById(ArgumentMatchers.any()))
                 .thenReturn(testFlight);
 
-        mockMvc.perform(delete("/api/flight/delete/id/21"))
+        mockMvc.perform(delete("/api/flight/delete/id/21")
+                .with(jwt()))
                 .andExpect(status().isNoContent());
     }
 
@@ -147,7 +154,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         Mockito.when(flightService.getFlightById(ArgumentMatchers.any()))
                 .thenReturn(null);
 
-        mockMvc.perform(delete("/api/flight/delete/id/91"))
+        mockMvc.perform(delete("/api/flight/delete/id/91")
+                .with(jwt()))
                 .andExpect(status().isNotFound());
     }
 
@@ -156,7 +164,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         Mockito.when(flightService.getDepartures(ArgumentMatchers.any()))
                 .thenReturn(testFlightList);
 
-        mockMvc.perform(get("/api/flight/departure/airportid/21"))
+        mockMvc.perform(get("/api/flight/departure/airportid/21")
+                .with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(21));
     }
@@ -166,7 +175,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         Mockito.when(flightService.getArrivals((ArgumentMatchers.any())))
                 .thenReturn(testFlightList);
 
-        mockMvc.perform(get("/api/flight/arrival/airportid/21"))
+        mockMvc.perform(get("/api/flight/arrival/airportid/21")
+                .with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(21));
     }
