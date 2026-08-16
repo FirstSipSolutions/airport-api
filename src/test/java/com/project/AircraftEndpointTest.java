@@ -104,7 +104,8 @@ public class AircraftEndpointTest extends BaseControllerTest {
 
         mockMvc.perform(post("/api/aircraft/createnew")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(parseAircraftToJson))
+                .content(parseAircraftToJson)
+                .with(jwt()))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(7));
     }
