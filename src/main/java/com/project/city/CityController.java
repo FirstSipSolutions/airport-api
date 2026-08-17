@@ -88,7 +88,12 @@ public class CityController {
         if(cityToUpdate == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(cityToUpdate);
+        cityToUpdate.setName(city.getName());
+        cityToUpdate.setState(city.getState());
+        cityToUpdate.setPopulation(city.getPopulation());
+        City updated = cityService.updateCity(id, cityToUpdate);
+
+        return ResponseEntity.ok(updated);
     }
 
 
