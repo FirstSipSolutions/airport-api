@@ -39,6 +39,7 @@ public class PassengerService {
             newPassengerData.setLastName(updatePassenger.getLastName());
             newPassengerData.setPhoneNumber(updatePassenger.getPhoneNumber());
             newPassengerData.setAircraft(updatePassenger.getAircraft());
+            newPassengerData.setCity(updatePassenger.getCity());
             return passengerRepository.save(newPassengerData);
         } else {
             return null;
