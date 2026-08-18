@@ -9,6 +9,7 @@
  */
 
 package com.project.airport;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.city.City;
 import com.project.flight.Flight;
@@ -27,7 +28,8 @@ public class Airport {
     private String code;
 
     @ManyToOne
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinColumn(name = "city_id")
+    @JsonIgnoreProperties("airports")
     private City city;
 
     @OneToMany(mappedBy = "airportArrival")
