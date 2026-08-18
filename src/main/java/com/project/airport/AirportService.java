@@ -75,18 +75,6 @@ public class AirportService {
             Airport airport = optionalAirport.get();
             airport.setName(airportDetails.getName());
             airport.setCode(airportDetails.getCode());
-
-            // Added this checkout to prevent a 500 code when cityId doesn't exist
-            Long cityId = airportDetails.getCity().getId();
-            Optional<City> findCity = cityRepository.findById(cityId);
-
-            if(findCity.isPresent()) {
-                airport.setCity(findCity.get());
-            } else {
-                System.out.println("City ID Error: No City with ID" + cityId + "found");
-                return null;
-            }
-
             return airportRepository.save(airport);
         }
         else {
