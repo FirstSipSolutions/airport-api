@@ -68,17 +68,13 @@ public class AirportService {
     public Airport updateAirport(Long id, Airport airportDetails) {
         Optional<Airport> optionalAirport = airportRepository.findById(id);
         if (optionalAirport.isPresent()) {
-
-
             Airport airport = optionalAirport.get();
             airport.setName(airportDetails.getName());
             airport.setCode(airportDetails.getCode());
             airport.setCity(airportDetails.getCity());
             return airportRepository.save(airport);
         }
-
         else {
-
 
             return null;
         }
