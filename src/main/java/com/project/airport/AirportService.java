@@ -9,6 +9,8 @@ package com.project.airport;
 // imports for spring and such
 import com.project.aircraft.Aircraft;
 import com.project.aircraft.AircraftRepository;
+import com.project.city.City;
+import com.project.city.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ public class AirportService {
     private AirportRepository airportRepository;
     @Autowired
     private AircraftRepository aircraftRepository;
+    @Autowired
+    private CityRepository cityRepository;
 
 
     // here the code grabs from repoistory andreturnss
@@ -71,7 +75,18 @@ public class AirportService {
             Airport airport = optionalAirport.get();
             airport.setName(airportDetails.getName());
             airport.setCode(airportDetails.getCode());
-            airport.setCity(airportDetails.getCity());
+
+            // Added this checkout to prevent a 500 code when cityId doesn't exist
+            Long cityId = airportDetails.getCity().getId();
+            Optional<City> findCity = cityRepository.findById(cityId);
+
+            if(findCity.isPresent()) {
+                airport.setCity(findCity.get());
+            } else {
+                System.out.println("City ID Error: No City with ID" + cityId + "found");
+                return null;
+            }
+
             return airportRepository.save(airport);
         }
         else {
